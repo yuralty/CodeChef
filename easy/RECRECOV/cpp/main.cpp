@@ -9,17 +9,21 @@ using namespace std;
 
 vector<int> connect[NMAX];
 int parent[NMAX];
-bool used[NMAX];
+bool mark[NMAX];
 
-bool dfs(int id)
+bool insert(int id)
 {
     for (auto child : connect[id])
     {
-        if (!parent[child])
+        if (mark[child]) continue;
+        mark[child] = true;
+        if (!parent[child] || insert(parent[child]))
         {
-            
+            parent[child] = id;
+            return true;
         }
     }
+    return false;
 }
 
 int main(void)
@@ -30,15 +34,23 @@ int main(void)
     {
         int n, m;
         cin >> n >> m;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 1; i <= n; ++i) {
             connect[i].clear();
         }
+        memset(parent, 0, sizeof parent);
 
         for (int i = 0; i < m; ++i) {
             int a, b;
             cin >> a >> b;
             connect[a].push_back(b);
         }
+
+        int cnt = n;
+        for (int i = 1; i <= n; ++i) {
+            memset(mark, 0, sizeof mark);
+            if (insert(i)) --cnt;
+        }
+        std::cout << cnt << std::endl;
     }
     return 0;
 }

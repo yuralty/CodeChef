@@ -1,0 +1,4 @@
+.scons*
+.git
+.gdb_history
+*.o
