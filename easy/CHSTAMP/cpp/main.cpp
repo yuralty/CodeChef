@@ -62,7 +62,7 @@ int main(void)
         for (int i = 0; i < m; ++i) {
             int day, from, to;
             cin >> day >> from >> to;
-            
+
             if (from > to) swap(from, to);
             Offer newOffer(day, from, to);
             offers.push_back(newOffer);
@@ -81,6 +81,7 @@ int main(void)
                     {
                         parent[pair.first] = pair.first;
                         parent[pair.second] = pair.second;
+                        std::cout << "this is a bad change";
                     }
                 }
 
@@ -105,7 +106,8 @@ int main(void)
 
 
         std::cout << sum << std::endl;
+        std::cout << "this is a good change" << std::endl;
     }
-    
+
     return 0;
 }
